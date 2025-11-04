@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-
+<body class="Terminal">
+    
+    <p id = "main">
+        
+    </p>
+</body>
 
 <html >
     
@@ -9,14 +14,35 @@
         * {background-color: transparent;color: #88C0C1; }
         h1 {rotate: 10deg;}
         input {color:#151824;background-color: transparent;border: transparent;}
+        b {color:  #75413c;}
     </style>
     <title class=animate-spin>
         Cyclic home
     </title>
     <script>
-        let THESCRIPT = ""
-        let currentText = "user@~ $ ";
+        if (document.cookie == null){
+                document.cookie = "username=user";
+        }
+        
+        let THESCRIPT = "";
+        
+        let currentText = getCookie("username")+"@~ $ ";
+        document.getElementById("main").innerHTML = currentText;
         let command = "";
+        function getCookie(cname) {
+                let name = cname + "=";
+                let decodedCookie = decodeURIComponent(document.cookie);
+                let ca = decodedCookie.split(';');
+                for(let i = 0; i <ca.length; i++) {
+                        let c = ca[i];
+                        while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                }
+                        if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                }
+                }      
+        }
         function render(){
             document.getElementById("main").innerHTML = currentText;
 
@@ -24,18 +50,38 @@
 
         function excCommand(command){
                 if (command == "neofetch"){
-                        currentText += 
-
+                        currentText += "<br><img src = \"PFP.png\"style=\"width:150px;height:150px; float: left; padding-right: 20px; vertical-align: top;\">   <b>username</b>: Cyclic007<br>   <b>Pronouns</b>: He/Him<br><b>personal Channel</b>: #cyclic-hot-mess<br>   <b></b><br><br><br><br><br>";
                 }
                 else if (command == "commands"){
-                        currentText += "<br><br>github<br>neofetch<br>commands<br>";
+                        currentText += "<br><br>github<br>neofetch<br>commands<br>signin {name}<br>message {message}<br>";
                 }
                 else if (command == "github"){
                         window.location.href="https://github.com/cyclic007";
                 }
+                else if (command == "guthib"){
+
+                        window.location.href="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+
+
+                }
+                else if (command.substring(0,6) == "signin"){
+                        document.cookie = "username="+command.substring(7,command.length)       
+                }
+                else if (command.substring(0,7) == "message"){
+//                         fetch(' {
+//   method: 'POST',
+//   headers: {
+//     'Content-type': 'application/json'
+//   },
+//   body:"{\"text:\" \""+command.substring(7,command.length)+"\"}",
+// });
+
+
+                }
                 else {
                         currentText += "<br> That is an invalid command<br> try again";
                 }
+                
         }
         document.addEventListener("keydown", function(event) {
             magicFunc(event.keyCode)
@@ -156,10 +202,10 @@
                         magicChar = " ";
                         break;
                 case 13 :
-                        excCommand(command);
+                        excCommand(command.trim());
                         command = "";
                         magicChar = "";
-                        currentText += "<br>user@~ $ "
+                        currentText += "<br>"+getCookie("username")+"@~ $ "
                         break;
                 case 8 :
                         
@@ -178,17 +224,9 @@
             console.log(command);
             
         }
+        
     </script>
 </html>
 
 
-<body class="Terminal">
-    
-    <p id = "main">
 
-
-
-
-
-    </p>
-</body>
