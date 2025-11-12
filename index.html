@@ -1,31 +1,50 @@
 <!DOCTYPE html>
 <body class="Terminal">
     
-    <p id = "main">
-    </p>
+    <div id = "main" style="display: inline;padding-right: 0; padding-inline-start: 0%;"></div>
+    
 </body>
+
+
 
 <html >
     
     <style>
+
+        @keyframes blinker {
+                to{
+                        visibility: hidden;
+                }
+        }
         footer,nav {background-color: #151824;position: fixed;width: 100%;right: 0;}
         body {background-color:#090a0a ; color: wheat;}
-        * {background-color: transparent;color: #88C0C1; }
+        * {background-color: transparent;color: #88C0C1; font-family: 'Courier New', Courier, monospace;margin-left: 10px;}
         h1 {rotate: 10deg;}
         input {color:#151824;background-color: transparent;border: transparent;}
         b {color:  #75413c;}
+        .command {color: #567844; display: inline;}
     </style>
     <title class=animate-spin>
         Cyclic home
     </title>
     <script>
+        let ip = "192.168.1.1"
+        fetch("https://ipinfo.io/json") 
+                .then(response => response.json())
+                .then(data => {
+                        setTimeout(1)
+					ip = 
+                      	`IP Address: ${data.ip}`;
+                })
+        let archACII = "<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣷⣤⣙⢻⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⡿⠛⠛⠿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⠿⣆⠀⠀⠀⠀<br>⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀<br>⠀⢀⣾⣿⣿⠿⠟⠛⠋⠉⠉⠀⠀⠀⠀⠀⠀⠉⠉⠙⠛⠻⠿⣿⣿⣷⡀⠀<br>⣠⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣄"
+        let coolACII = "<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣾⠿⣻⣿⠟⠁⠀⠀⠀⠀⣠⣾⡆⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⡿⠟⢉⣴⣾⠟⠁⠀⠀⠀⢀⣴⡿⠋⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣾⠟⠉⢀⣴⣿⠟⠁⠀⠀⠀⢀⣴⡿⠋⠀⣸⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⡿⠟⠁⠀⣠⣾⠟⠁⠀⠀⠀⢀⣴⡿⠋⠀⠀⢠⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠋⠀⠀⢀⣾⡿⠁⠀⠀⠀⢀⣴⡿⠋⠀⠀⠀⢀⣾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⠟⠁⠀⠀⣰⣿⠏⠀⠀⠀⢀⣴⡿⠋⠀⠀⠀⠀⠀⣼⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⡿⠃⠀⠀⠀⣴⡿⠁⠀⠀⢀⣴⣿⠟⠁⠀⠀⠀⠀⠀⣼⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠟⠁⠀⠀⠀⣸⡿⠁⠀⠀⣴⣿⠟⠁⠀⠀⠀⠀⠀⠀⣸⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠏⠀⠀⠀⠀⢠⣿⠃⢀⣴⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠏⠀⠀⠀⠀⠀⠸⣿⣶⡿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⣿⣷⡀⠀⠀⠀⣠⣴⣶⣶⠀⠀⠀⣠⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⢻⣿⡇⠀⢀⣾⣿⣿⣿⡟⠀⣠⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣮⡙⠃⠀⠈⠻⠿⠟⣋⣴⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⠿⣿⣿⣿⣿⣅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⣿⣦⡘⠀⠀⠀⢠⣾⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⡶⣶⡄<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣇⡀⣀⢀⣼⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣾⠏⣿⣿⢎⣷<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⡟⣸⡇⢿⣆⢻⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡶⢟⣫⣵⡶⣶⡿⠿⠃<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⠃⣿⡇⠸⣿⡎⢻⣿⣿⣿⣶⣄⡀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⡶⢟⣫⣽⠾⠛⠉⠁⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⡿⣿⣿⠃⠀⣿⡇⠀⢻⣿⡄⠘⠿⣿⣿⣿⣿⣦⣄⠀⢀⣠⣴⡾⢟⣫⣵⠾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⡿⢋⣼⡿⠃⠀⢸⣿⠃⠀⠀⠻⣿⣆⠀⠈⠻⣿⣷⣝⠻⣿⣿⣯⣴⠾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⡿⠋⣠⣿⡿⠁⠀⠀⢸⣿⠀⠀⠀⠀⠹⣿⣧⡀⠀⠈⠙⢿⣷⣮⡻⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⡿⠁⣰⣿⠟⠀⠀⠀⠀⣿⡟⢿⠀⠀⠀⠀⠈⢿⣷⣄⠀⠀⠀⠙⢿⣿⣌⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣧⣴⣿⡟⠀⠀⠀⠀⢸⣿⠃⠀⠀⠀⠀⠀⠀⠀⠻⣿⣦⠀⠀⣠⣾⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠻⣿⣤⣄⣀⠀⠀⣿⡿⠠⠀⠀⠀⠀⠀⣀⣤⣤⣿⣿⣷⣾⠿⢿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣽⡿⠿⠿⠿⣿⣿⣶⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⠾⠛⠉⣀⣤⡶⠟⠛⠉⠉⢿⣿⣇⠀⠀⢹⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡶⠟⢋⣡⣴⠶⠟⠋⠁⠀⠀⠀⠀⠀⠘⣿⣿⡀⠀⠸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⠾⢛⣡⣴⠾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⡇⠀⠀⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⢀⣠⡴⣚⣭⡶⠟⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⠀⠀⢹⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⣀⣤⣶⣿⠷⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⢀⣴⡾⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡆⠀⢸⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡇⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠃⠀⠈⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
         if (document.cookie == null){
                 document.cookie = "username=user";
         }
         
         let THESCRIPT = "";
         
-        let currentText = "Type in \"commands and see what you can do\""+getCookie("username")+"@~ $ ";
+        let currentText = "Type in <div class=\"command\">commands</div> and see what you can do<br><div style=\"color: #FF2F00; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #DDBDFC;display: inline;\">"+ip+"</div> $ <div class = \"command\">";
         document.getElementById("main").innerHTML = currentText;
         let command = "";
         function getCookie(cname) {
@@ -43,16 +62,25 @@
                 }      
         }
         function render(){
-            document.getElementById("main").innerHTML = currentText;
+            
+            document.getElementById("main").innerHTML = currentText+"<div style=\"animation: blinker 1.5s steps(2, start) infinite; display:table-cell;margin: 0px;padding-left: -5px;\">█</div><br><br><br><br><br>";
 
         }
-
+        
         function excCommand(command){
                 if (command == "neofetch"){
-                        currentText += "<br><img src = \"PFP.png\"style=\"width:150px;height:150px; float: left; padding-right: 20px; vertical-align: top;\">   <b>username</b>: Cyclic007<br>   <b>Pronouns</b>: He/Him<br><b>personal Channel</b>: #cyclic-hot-mess<br>   <b>Email</b>: cyclicthefox@hackclub.app<br><br><br><br><br>";
+                        if ((Math.random()*10)%2 == 0){
+                        currentText += "<br><img src = \"PFP.png\"style=\"width:150px;height:150px; float: left; padding-right: 20px; vertical-align: top;\">   <b>username</b>: Cyclic007<br>   <b>Pronouns</b>: He/Him<br><b>personal Channel</b>: #cyclic-hot-mess<br>   <b>Email</b>: cyclicthefox@hackclub.app<br>arch<br><br><br><br>";
+                        }
+                }
+                else if (command == "arch"){
+                        currentText += "</div></div>"+archACII;
+                }
+                else if (command == "shaw"){
+                        currentText+="</div></div>"+coolACII;
                 }
                 else if (command == "commands"){
-                        currentText += "<br><br>github<br>neofetch<br>commands<br>signin {name}<br>message {message}<br>";
+                        currentText += "</div>"+"<div class=\"command\"><br><br>github<br>neofetch<br>commands<br>signin {name}<br>message {message}<br>arch<br></div>";
                 }
                 else if (command == "github"){
                         window.location.href="https://github.com/cyclic007";
@@ -60,8 +88,6 @@
                 else if (command == "guthib"){
 
                         window.location.href="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-
-
                 }
                 else if (command.substring(0,6) == "signin"){
                         document.cookie = "username="+command.substring(7,command.length)       
@@ -78,7 +104,7 @@
 
                 }
                 else {
-                        currentText += "<br> That is an invalid command<br> try again";
+                        currentText += "</div>"+"<br> That is an invalid command<br> try again";
                 }
                 
         }
@@ -87,6 +113,15 @@
         });
 
         function magicFunc(keycode){
+        if(ip == "0.0.0.0"){
+                
+        fetch("https://ipinfo.io/json") 
+                .then(response => response.json())
+                .then(data => {
+					ip = 
+                      	`IP Address: ${data.ip}`;
+                })
+        }
             console.log(keycode);
             
             //A-Z  65-90 1234567890  : 48-57  38 UP 40 DOWN 32 SPACE 13 Enter 8 BACKSPACE
@@ -204,7 +239,8 @@
                         excCommand(command.trim());
                         command = "";
                         magicChar = "";
-                        currentText += "<br>"+getCookie("username")+"@~ $ "
+                        
+                        currentText += "<br><div style=\"color: #FF2F00; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #DDBDFC;display: inline;\">"+ip.substring(12,ip.length)+"</div> $ <div class = \"command\">"
                         break;
                 case 8 :
                         
