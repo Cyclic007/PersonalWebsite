@@ -18,17 +18,18 @@
         }
         footer,nav {background-color: #151824;position: fixed;width: 100%;right: 0;}
         body {background-color:#000000 ; color: wheat;}
-        * {background-color: transparent;color: #949cbb; font-family: 'Courier New', Courier, monospace;margin-left: 10px;}
+        * {background-color: transparent;color: #949cbb; font-family: 'Courier New', Courier, monospace;margin-left: 20px; padding: 10;}
         h1 {rotate: 10deg;}
         input {color:#151824;background-color: transparent;border: transparent;}
         b {color:  #EA999C;}
         .command {color: #209FB5; display: inline;}
+        div {margin: 0;}
     </style>
     <title class=animate-spin>
         Cyclic home
     </title>
     <script>
-        let ip = "192.168.1.1"
+        let ip = "127.0.0.1"
         fetch("https://ipinfo.io/json") 
                 .then(response => response.json())
                 .then(data => {
@@ -63,14 +64,15 @@
         }
         function render(){
             
-            document.getElementById("main").innerHTML = currentText+"<div style=\"animation: blinker 1.5s steps(2, start) infinite; display:table-cell;margin: 0px;padding-left: -5px;\">█</div><br><br><br><br><br>";
+            document.getElementById("main").innerHTML = currentText+"<div style=\"animation: blinker 1.5s steps(2, start) infinite; display:table-cell;margin: 0px;padding-left: -5px; color: #209FB5;\">█</div><br><br><br><br><br>";
 
         }
         
         function excCommand(command){
+                currentText += "</div><div style = \"margin-left: 20px;display: inline;\""
                 if (command == "neofetch"){
                         
-                        currentText += "<br><img src = \"PFP.png\"style=\"width:150px;height:150px; float: left; padding-right: 20px; vertical-align: top;\">   <b>username</b>: Cyclic007<br>   <b>Pronouns</b>: He/Him<br><b>personal Channel</b>: #cyclic-hot-mess<br>   <b>Email</b>: cyclicthefox@hackclub.app<br><br>  I use arch BTW<br><br><br><br></div>";
+                        currentText += "<br><br><img src = \"PFP.png\"style=\"width:150px;height:150px; float: left; padding-right: 20px; vertical-align: top;\">   <b>username</b>: Cyclic007<br>   <b>Pronouns</b>: He/Him<br><b>personal Channel</b>: #cyclic-hot-mess<br>   <b>Email</b>: cyclicthefox@hackclub.app<br><br>  I use arch BTW<br><br><br><br></div>";
                         
                 }
                 else if (command == "arch"){
@@ -107,6 +109,7 @@
                 else {
                         currentText += "</div>"+"<br> That is an invalid command<br> try again";
                 }
+                currentText += "</div>"
                 render();
                 window.scrollTo(0,1000000000);
                 
@@ -116,7 +119,7 @@
         });
 
         function magicFunc(keycode){
-            console.log(keycode);
+            //console.log(keycode);
             
             //A-Z  65-90 1234567890  : 48-57  38 UP 40 DOWN 32 SPACE 13 Enter 8 BACKSPACE
             let magicChar = " "
@@ -250,7 +253,7 @@
             currentText += magicChar;
             
             render();
-            console.log(command);
+            //console.log(command);
             
         }
         
