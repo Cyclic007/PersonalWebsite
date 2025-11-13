@@ -17,12 +17,12 @@
                 }
         }
         footer,nav {background-color: #151824;position: fixed;width: 100%;right: 0;}
-        body {background-color:#090a0a ; color: wheat;}
-        * {background-color: transparent;color: #88C0C1; font-family: 'Courier New', Courier, monospace;margin-left: 10px;}
+        body {background-color:#000000 ; color: wheat;}
+        * {background-color: transparent;color: #949cbb; font-family: 'Courier New', Courier, monospace;margin-left: 10px;}
         h1 {rotate: 10deg;}
         input {color:#151824;background-color: transparent;border: transparent;}
-        b {color:  #75413c;}
-        .command {color: #567844; display: inline;}
+        b {color:  #EA999C;}
+        .command {color: #209FB5; display: inline;}
     </style>
     <title class=animate-spin>
         Cyclic home
@@ -44,7 +44,7 @@
         
         let THESCRIPT = "";
         
-        let currentText = "Type in <div class=\"command\">commands</div> and see what you can do<br><div style=\"color: #FF2F00; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #DDBDFC;display: inline;\">"+ip+"</div> $ <div class = \"command\">";
+        let currentText = "Type in <div class=\"command\">commands</div> and see what you can do<br><div style=\"color: #CA9EE6; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #8CAAEE;display: inline;\">"+ip+"</div> $ <div class = \"command\">";
         document.getElementById("main").innerHTML = currentText;
         let command = "";
         function getCookie(cname) {
@@ -69,9 +69,9 @@
         
         function excCommand(command){
                 if (command == "neofetch"){
-                        if ((Math.random()*10)%2 == 0){
-                        currentText += "<br><img src = \"PFP.png\"style=\"width:150px;height:150px; float: left; padding-right: 20px; vertical-align: top;\">   <b>username</b>: Cyclic007<br>   <b>Pronouns</b>: He/Him<br><b>personal Channel</b>: #cyclic-hot-mess<br>   <b>Email</b>: cyclicthefox@hackclub.app<br>arch<br><br><br><br>";
-                        }
+                        
+                        currentText += "<br><img src = \"PFP.png\"style=\"width:150px;height:150px; float: left; padding-right: 20px; vertical-align: top;\">   <b>username</b>: Cyclic007<br>   <b>Pronouns</b>: He/Him<br><b>personal Channel</b>: #cyclic-hot-mess<br>   <b>Email</b>: cyclicthefox@hackclub.app<br><br>  I use arch BTW<br><br><br><br></div>";
+                        
                 }
                 else if (command == "arch"){
                         currentText += "</div></div>"+archACII;
@@ -106,6 +106,8 @@
                 else {
                         currentText += "</div>"+"<br> That is an invalid command<br> try again";
                 }
+                render();
+                window.scrollTo(0,1000000000);
                 
         }
         document.addEventListener("keydown", function(event) {
@@ -240,7 +242,7 @@
                         command = "";
                         magicChar = "";
                         
-                        currentText += "<br><div style=\"color: #FF2F00; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #DDBDFC;display: inline;\">"+ip.substring(12,ip.length)+"</div> $ <div class = \"command\">"
+                        currentText += "<br><div style=\"color: #CA9EE6; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #8CAAEE;display: inline;\">"+ip.substring(12,ip.length)+"</div> $ <div class = \"command\">"
                         break;
                 case 8 :
                         
