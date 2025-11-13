@@ -90,7 +90,8 @@
                         window.location.href="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
                 }
                 else if (command.substring(0,6) == "signin"){
-                        document.cookie = "username="+command.substring(7,command.length)       
+                        document.cookie = "username="+command.substring(7,command.length)     
+                        currentText+="</div>"  
                 }
                 else if (command.substring(0,7) == "message"){
 //                         fetch(' {
@@ -100,7 +101,7 @@
 //   },
 //   body:"{\"text:\" \""+command.substring(7,command.length)+"\"}",
 // });
-
+                        currentText += "</div><br> message has been sent<br>"
 
                 }
                 else {
@@ -115,15 +116,6 @@
         });
 
         function magicFunc(keycode){
-        if(ip == "0.0.0.0"){
-                
-        fetch("https://ipinfo.io/json") 
-                .then(response => response.json())
-                .then(data => {
-					ip = 
-                      	`IP Address: ${data.ip}`;
-                })
-        }
             console.log(keycode);
             
             //A-Z  65-90 1234567890  : 48-57  38 UP 40 DOWN 32 SPACE 13 Enter 8 BACKSPACE
