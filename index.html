@@ -21,7 +21,7 @@
         * {background-color: transparent;color: #949cbb; font-family: 'Courier New', Courier, monospace;margin-left: 20px; padding: 10;}
         h1 {rotate: 10deg;}
         input {color:#151824;background-color: transparent;border: transparent;}
-        b {color:  #EA999C;}
+        b {color:  #EA999C;margin: 0;}
         .command {color: #209FB5; display: inline;}
         div {margin: 0;}
     </style>
@@ -29,6 +29,7 @@
         Cyclic home
     </title>
     <script>
+        console.log("try shaw and guthib")
         let ip = "127.0.0.1"
         fetch("https://ipinfo.io/json") 
                 .then(response => response.json())
@@ -45,7 +46,7 @@
         
         let THESCRIPT = "";
         
-        let currentText = "Type in <div class=\"command\">commands</div> and see what you can do<br><div style=\"color: #CA9EE6; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #8CAAEE;display: inline;\">"+ip+"</div> $ <div class = \"command\">";
+        let currentText = "Welcome to cyclic's home where It is all terminals <b>ALL</b> the way down<br>Type in <div class=\"command\">commands</div> and see what you can do<br><div style=\"color: #CA9EE6; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #8CAAEE;display: inline;\">"+ip+"</div> $ <div class = \"command\">";
         document.getElementById("main").innerHTML = currentText;
         let command = "";
         function getCookie(cname) {
