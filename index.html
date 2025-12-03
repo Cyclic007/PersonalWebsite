@@ -1,265 +1,293 @@
 <!DOCTYPE html>
-<body class="Terminal">
-    
-    <div id = "main" style="display: inline;padding-right: 0; padding-inline-start: 0%;"></div>
-    
-</body>
 
 
-
-<html >
-    
-    <style>
-
-        @keyframes blinker {
-                to{
-                        visibility: hidden;
-                }
+<style>
+        @media screen and (max-width: 600px) {
+                .desktop {display: none;}
         }
-        footer,nav {background-color: #151824;position: fixed;width: 100%;right: 0;}
-        body {background-color:#000000 ; color: wheat;}
-        * {background-color: transparent;color: #949cbb; font-family: 'Courier New', Courier, monospace;margin-left: 20px; padding: 10;}
-        h1 {rotate: 10deg;}
-        input {color:#151824;background-color: transparent;border: transparent;}
-        b {color:  #EA999C;margin: 0;}
-        .command {color: #209FB5; display: inline;}
-        div {margin: 0;}
-    </style>
-    <title class=animate-spin>
-        Cyclic home
-    </title>
-    <script>
-        console.log("try shaw and guthib")
-        let ip = "127.0.0.1"
-        fetch("https://ipinfo.io/json") 
-                .then(response => response.json())
-                .then(data => {
-                        setTimeout(1)
-					ip = 
-                      	`IP Address: ${data.ip}`;
-                })
-        let archACII = "<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣷⣤⣙⢻⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⡿⠛⠛⠿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⠿⣆⠀⠀⠀⠀<br>⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀<br>⠀⢀⣾⣿⣿⠿⠟⠛⠋⠉⠉⠀⠀⠀⠀⠀⠀⠉⠉⠙⠛⠻⠿⣿⣿⣷⡀⠀<br>⣠⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣄"
-        let coolACII = "<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣾⠿⣻⣿⠟⠁⠀⠀⠀⠀⣠⣾⡆⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⡿⠟⢉⣴⣾⠟⠁⠀⠀⠀⢀⣴⡿⠋⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣾⠟⠉⢀⣴⣿⠟⠁⠀⠀⠀⢀⣴⡿⠋⠀⣸⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⡿⠟⠁⠀⣠⣾⠟⠁⠀⠀⠀⢀⣴⡿⠋⠀⠀⢠⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠋⠀⠀⢀⣾⡿⠁⠀⠀⠀⢀⣴⡿⠋⠀⠀⠀⢀⣾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⠟⠁⠀⠀⣰⣿⠏⠀⠀⠀⢀⣴⡿⠋⠀⠀⠀⠀⠀⣼⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⡿⠃⠀⠀⠀⣴⡿⠁⠀⠀⢀⣴⣿⠟⠁⠀⠀⠀⠀⠀⣼⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠟⠁⠀⠀⠀⣸⡿⠁⠀⠀⣴⣿⠟⠁⠀⠀⠀⠀⠀⠀⣸⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠏⠀⠀⠀⠀⢠⣿⠃⢀⣴⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠏⠀⠀⠀⠀⠀⠸⣿⣶⡿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⣿⣷⡀⠀⠀⠀⣠⣴⣶⣶⠀⠀⠀⣠⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⢻⣿⡇⠀⢀⣾⣿⣿⣿⡟⠀⣠⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣮⡙⠃⠀⠈⠻⠿⠟⣋⣴⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⠿⣿⣿⣿⣿⣅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⣿⣦⡘⠀⠀⠀⢠⣾⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⡶⣶⡄<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣇⡀⣀⢀⣼⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣾⠏⣿⣿⢎⣷<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⡟⣸⡇⢿⣆⢻⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡶⢟⣫⣵⡶⣶⡿⠿⠃<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⠃⣿⡇⠸⣿⡎⢻⣿⣿⣿⣶⣄⡀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⡶⢟⣫⣽⠾⠛⠉⠁⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⡿⣿⣿⠃⠀⣿⡇⠀⢻⣿⡄⠘⠿⣿⣿⣿⣿⣦⣄⠀⢀⣠⣴⡾⢟⣫⣵⠾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⡿⢋⣼⡿⠃⠀⢸⣿⠃⠀⠀⠻⣿⣆⠀⠈⠻⣿⣷⣝⠻⣿⣿⣯⣴⠾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⡿⠋⣠⣿⡿⠁⠀⠀⢸⣿⠀⠀⠀⠀⠹⣿⣧⡀⠀⠈⠙⢿⣷⣮⡻⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⡿⠁⣰⣿⠟⠀⠀⠀⠀⣿⡟⢿⠀⠀⠀⠀⠈⢿⣷⣄⠀⠀⠀⠙⢿⣿⣌⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣧⣴⣿⡟⠀⠀⠀⠀⢸⣿⠃⠀⠀⠀⠀⠀⠀⠀⠻⣿⣦⠀⠀⣠⣾⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠻⣿⣤⣄⣀⠀⠀⣿⡿⠠⠀⠀⠀⠀⠀⣀⣤⣤⣿⣿⣷⣾⠿⢿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣽⡿⠿⠿⠿⣿⣿⣶⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⠾⠛⠉⣀⣤⡶⠟⠛⠉⠉⢿⣿⣇⠀⠀⢹⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡶⠟⢋⣡⣴⠶⠟⠋⠁⠀⠀⠀⠀⠀⠘⣿⣿⡀⠀⠸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⠾⢛⣡⣴⠾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⡇⠀⠀⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⢀⣠⡴⣚⣭⡶⠟⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⠀⠀⢹⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⣀⣤⣶⣿⠷⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⢀⣴⡾⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡆⠀⢸⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡇⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠃⠀⠈⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
-        if (document.cookie == null){
-                document.cookie = "username=user";
+        @media screen and (min-width:600px) {
+                .mobile {display: none; justify-content: center;}
         }
+
+
+</style>
+
+
+
+<div class = "desktop">
+        <body class="Terminal">
         
-        let THESCRIPT = "";
+        <div id = "main" style="display: inline;padding-right: 0; padding-inline-start: 0%;"></div>
         
-        let currentText = "Welcome to cyclic's home where It is all terminals <b>ALL</b> the way down<br>Type in <div class=\"command\">commands</div> and see what you can do<br><div style=\"color: #CA9EE6; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #8CAAEE;display: inline;\">"+ip+"</div> $ <div class = \"command\">";
-        document.getElementById("main").innerHTML = currentText;
-        let command = "";
-        function getCookie(cname) {
-                let name = cname + "=";
-                let decodedCookie = decodeURIComponent(document.cookie);
-                let ca = decodedCookie.split(';');
-                for(let i = 0; i <ca.length; i++) {
-                        let c = ca[i];
-                        while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                }
-                        if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                }
-                }      
-        }
-        function render(){
-            
-            document.getElementById("main").innerHTML = currentText+"<div style=\"animation: blinker 1.5s steps(2, start) infinite; display:table-cell;margin: 0px;padding-left: -5px; color: #209FB5;\">█</div><br><br><br><br><br>";
+        </body>
 
-        }
+
+
+        <html >
         
-        function excCommand(command){
-                currentText += "</div><div style = \"margin-left: 20px;display: inline;\""
-                if (command == "neofetch"){
-                        
-                        currentText += "<br><br><img src = \"PFP.png\"style=\"width:150px;height:150px; float: left; padding-right: 20px; vertical-align: top;\">   <b>username</b>: Cyclic007<br>   <b>Pronouns</b>: He/Him<br><b>personal Channel</b>: #cyclic-hot-mess<br>   <b>Email</b>: cyclicthefox@hackclub.app<br><br>  I use arch BTW<br><br><br><br></div>";
-                        
-                }
-                else if (command == "arch"){
-                        currentText += "</div></div>"+archACII;
-                }
-                else if (command == "shaw"){
-                        currentText+="</div></div>"+coolACII;
-                }
-                else if (command == "commands"){
-                        currentText += "</div>"+"<div class=\"command\"><br><br>github<br>neofetch<br>commands<br>signin {name}<br>message {message}<br>arch<br></div>";
-                }
-                else if (command == "github"){
-                        window.location.href="https://github.com/cyclic007";
-                }
-                else if (command == "guthib"){
+        <style>
 
-                        window.location.href="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-                }
-                else if (command.substring(0,6) == "signin"){
-                        document.cookie = "username="+command.substring(7,command.length)     
-                        currentText+="</div>"  
-                }
-                else if (command.substring(0,7) == "message"){
-//                         fetch(' {
-//   method: 'POST',
-//   headers: {
-//     'Content-type': 'application/json'
-//   },
-//   body:"{\"text:\" \""+command.substring(7,command.length)+"\"}",
-// });
-                        currentText += "</div><br> message has been sent<br>"
-
-                }
-                else {
-                        currentText += "</div>"+"<br> That is an invalid command<br> try again";
-                }
-                currentText += "</div>"
-                render();
-                window.scrollTo(0,1000000000);
-                
-        }
-        document.addEventListener("keydown", function(event) {
-            magicFunc(event.keyCode)
-        });
-
-        function magicFunc(keycode){
-            //console.log(keycode);
-            
-            //A-Z  65-90 1234567890  : 48-57  38 UP 40 DOWN 32 SPACE 13 Enter 8 BACKSPACE
-            let magicChar = " "
-            switch(keycode){
-                case 48 :
-                        magicChar = "0";
-                        break;
-                case 49 :
-                        magicChar = "1";
-                        break;
-                case 50 :
-                        magicChar = "2";
-                        break;
-                case 51 :
-                        magicChar = "3";
-                        break;
-                case 52 :
-                        magicChar = "4";
-                        break;
-                case 53 :
-                        magicChar = "5";
-                        break;
-                case 54 :
-                        magicChar = "6";
-                        break;
-                case 55 :
-                        magicChar = "7";
-                        break;
-                case 56 :
-                        magicChar = "8";
-                        break;
-                case 57 :
-                        magicChar = "9";
-                        break;
-                case 65 :
-                        magicChar = "a";
-                        break;
-                case 66 :
-                        magicChar = "b";
-                        break;
-                case 67 :
-                        magicChar = "c";
-                        break;
-                case 68 :
-                        magicChar = "d";
-                        break;
-                case 69 :
-                        magicChar = "e";
-                        break;
-                case 70 :
-                        magicChar = "f";
-                        break;
-                case 71 :
-                        magicChar = "g";
-                        break;
-                case 72 :
-                        magicChar = "h";
-                        break;
-                case 73 :
-                        magicChar = "i";
-                        break;
-                case 74 :
-                        magicChar = "j";
-                        break;
-                case 75 :
-                        magicChar = "k";
-                        break;
-                case 76 :
-                        magicChar = "l";
-                        break;
-                case 77 :
-                        magicChar = "m";
-                        break;
-                case 78 :
-                        magicChar = "n";
-                        break;
-                case 79 :
-                        magicChar = "o";
-                        break;
-                case 80 :
-                        magicChar = "p";
-                        break;
-                case 81 :
-                        magicChar = "q";
-                        break;
-                case 82 :
-                        magicChar = "r";
-                        break;
-                case 83 :
-                        magicChar = "s";
-                        break;
-                case 84 :
-                        magicChar = "t";
-                        break;
-                case 85 :
-                        magicChar = "u";
-                        break;
-                case 86 :
-                        magicChar = "v";
-                        break;
-                case 87 :
-                        magicChar = "w";
-                        break;
-                case 88 :
-                        magicChar = "x";
-                        break;
-                case 89 :
-                        magicChar = "y";
-                        break;
-                case 32 :
-                        magicChar = " ";
-                        break;
-                case 13 :
-                        excCommand(command.trim());
-                        command = "";
-                        magicChar = "";
-                        
-                        currentText += "<br><div style=\"color: #CA9EE6; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #8CAAEE;display: inline;\">"+ip.substring(12,ip.length)+"</div> $ <div class = \"command\">"
-                        break;
-                case 8 :
-                        
-                        magicChar = "";
-                        
-                        if(command != ""){
-                            currentText = currentText.substring(0,currentText.length-1)
+                @keyframes blinker {
+                        to{
+                                visibility: hidden;
                         }
-                        command = command.substring(0,command.length-1);
-                        break;
-            }
-            command += magicChar;
-            currentText += magicChar;
-            
-            render();
-            //console.log(command);
-            
-        }
-        
-    </script>
-</html>
+                }
+                footer,nav {background-color: #151824;position: fixed;width: 100%;right: 0;}
+                body {background-color:#000000 ; color: wheat;}
+                * {background-color: transparent;color: #949cbb; font-family: 'Courier New', Courier, monospace;margin-left: 20px; padding: 10;}
+                h1 {rotate: 10deg;}
+                input {color:#151824;background-color: transparent;border: transparent;}
+                b {color:  #EA999C;margin: 0;}
+                .command {color: #209FB5; display: inline;}
+                div {margin: 0;}
+        </style>
+        <title class=animate-spin>
+                Cyclic home
+        </title>
+        <script>
+                console.log("try shaw and guthib")
+                let ip = "127.0.0.1"
+                fetch("https://ipinfo.io/json") 
+                        .then(response => response.json())
+                        .then(data => {
+                                setTimeout(1)
+                                                ip = 
+                                `IP Address: ${data.ip}`;
+                        })
+                let archACII = "<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣷⣤⣙⢻⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⡿⠛⠛⠿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⠿⣆⠀⠀⠀⠀<br>⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀<br>⠀⢀⣾⣿⣿⠿⠟⠛⠋⠉⠉⠀⠀⠀⠀⠀⠀⠉⠉⠙⠛⠻⠿⣿⣿⣷⡀⠀<br>⣠⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣄"
+                let coolACII = "<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣤⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣤⣾⠿⣻⣿⠟⠁⠀⠀⠀⠀⣠⣾⡆⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⡿⠟⢉⣴⣾⠟⠁⠀⠀⠀⢀⣴⡿⠋⣿⠇⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⣾⠟⠉⢀⣴⣿⠟⠁⠀⠀⠀⢀⣴⡿⠋⠀⣸⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣴⡿⠟⠁⠀⣠⣾⠟⠁⠀⠀⠀⢀⣴⡿⠋⠀⠀⢠⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠋⠀⠀⢀⣾⡿⠁⠀⠀⠀⢀⣴⡿⠋⠀⠀⠀⢀⣾⠇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⠟⠁⠀⠀⣰⣿⠏⠀⠀⠀⢀⣴⡿⠋⠀⠀⠀⠀⠀⣼⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⡿⠃⠀⠀⠀⣴⡿⠁⠀⠀⢀⣴⣿⠟⠁⠀⠀⠀⠀⠀⣼⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠟⠁⠀⠀⠀⣸⡿⠁⠀⠀⣴⣿⠟⠁⠀⠀⠀⠀⠀⠀⣸⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣾⠏⠀⠀⠀⠀⢠⣿⠃⢀⣴⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⠏⠀⠀⠀⠀⠀⠸⣿⣶⡿⠛⠁⠀⠀⠀⠀⠀⠀⠀⠀⣼⡿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⡟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣴⡿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣿⠏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⡇⣿⣷⡀⠀⠀⠀⣠⣴⣶⣶⠀⠀⠀⣠⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣧⢻⣿⡇⠀⢀⣾⣿⣿⣿⡟⠀⣠⣾⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣮⡙⠃⠀⠈⠻⠿⠟⣋⣴⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⠿⣿⣿⣿⣿⣅⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⣿⣦⡘⠀⠀⠀⢠⣾⡿⠋⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⣶⡶⣶⡄<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣇⡀⣀⢀⣼⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣾⠏⣿⣿⢎⣷<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣰⣿⡟⣸⡇⢿⣆⢻⣿⣿⣦⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣤⡶⢟⣫⣵⡶⣶⡿⠿⠃<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⣿⣿⠃⣿⡇⠸⣿⡎⢻⣿⣿⣿⣶⣄⡀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⡶⢟⣫⣽⠾⠛⠉⠁⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⡿⣿⣿⠃⠀⣿⡇⠀⢻⣿⡄⠘⠿⣿⣿⣿⣿⣦⣄⠀⢀⣠⣴⡾⢟⣫⣵⠾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣠⣾⡿⢋⣼⡿⠃⠀⢸⣿⠃⠀⠀⠻⣿⣆⠀⠈⠻⣿⣷⣝⠻⣿⣿⣯⣴⠾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⡿⠋⣠⣿⡿⠁⠀⠀⢸⣿⠀⠀⠀⠀⠹⣿⣧⡀⠀⠈⠙⢿⣷⣮⡻⣿⣆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⡿⠁⣰⣿⠟⠀⠀⠀⠀⣿⡟⢿⠀⠀⠀⠀⠈⢿⣷⣄⠀⠀⠀⠙⢿⣿⣌⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⣧⣴⣿⡟⠀⠀⠀⠀⢸⣿⠃⠀⠀⠀⠀⠀⠀⠀⠻⣿⣦⠀⠀⣠⣾⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠉⠻⣿⣤⣄⣀⠀⠀⣿⡿⠠⠀⠀⠀⠀⠀⣀⣤⣤⣿⣿⣷⣾⠿⢿⡿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣽⡿⠿⠿⠿⣿⣿⣶⣶⣶⣶⣶⣿⣿⣿⣿⣿⣿⠟⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣠⣴⠾⠛⠉⣀⣤⡶⠟⠛⠉⠉⢿⣿⣇⠀⠀⢹⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣤⡶⠟⢋⣡⣴⠶⠟⠋⠁⠀⠀⠀⠀⠀⠘⣿⣿⡀⠀⠸⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣀⣴⠾⢛⣡⣴⠾⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢹⣿⡇⠀⠀⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⢀⣠⡴⣚⣭⡶⠟⠋⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⣿⣿⠀⠀⢹⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⣀⣤⣶⣿⠷⠛⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⠀⠀⢸⣿⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⢀⣴⡾⠿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⣿⡆⠀⢸⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡇⠀⢸⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⠃⠀⠈⠟⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀"
+                if (document.cookie == null){
+                        document.cookie = "username=user";
+                }
+                
+                let THESCRIPT = "";
+                
+                let currentText = "Welcome to cyclic's home where It is all terminals <b>ALL</b> the way down<br>Type in <div class=\"command\">commands</div> and see what you can do<br><div style=\"color: #CA9EE6; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #8CAAEE;display: inline;\">"+ip+"</div> $ <div class = \"command\">";
+                document.getElementById("main").innerHTML = currentText;
+                let command = "";
+                function getCookie(cname) {
+                        let name = cname + "=";
+                        let decodedCookie = decodeURIComponent(document.cookie);
+                        let ca = decodedCookie.split(';');
+                        for(let i = 0; i <ca.length; i++) {
+                                let c = ca[i];
+                                while (c.charAt(0) == ' ') {
+                                c = c.substring(1);
+                        }
+                                if (c.indexOf(name) == 0) {
+                                return c.substring(name.length, c.length);
+                        }
+                        }      
+                }
+                function render(){
+                
+                document.getElementById("main").innerHTML = currentText+"<div style=\"animation: blinker 1.5s steps(2, start) infinite; display:table-cell;margin: 0px;padding-left: -5px; color: #209FB5;\">█</div><br><br><br><br><br>";
+
+                }
+                
+                function excCommand(command){
+                        currentText += "</div><div style = \"margin-left: 20px;display: inline;\""
+                        if (command == "neofetch"){
+                                
+                                currentText += "<br><br><img src = \"PFP.png\"style=\"width:150px;height:150px; float: left; padding-right: 20px; vertical-align: top;\">   <b>username</b>: Cyclic007<br>   <b>Pronouns</b>: He/Him<br><b>personal Channel</b>: #cyclic-hot-mess<br>   <b>Email</b>: cyclicthefox@hackclub.app<br><br>  I use arch BTW<br><br><br><br></div>";
+                                
+                        }
+                        else if (command == "arch"){
+                                currentText += "</div></div>"+archACII;
+                        }
+                        else if (command == "shaw"){
+                                currentText+="</div></div>"+coolACII;
+                        }
+                        else if (command == "commands"){
+                                currentText += "</div>"+"<div class=\"command\"><br><br>github<br>neofetch<br>commands<br>signin {name}<br>message {message}<br>arch<br></div>";
+                        }
+                        else if (command == "github"){
+                                window.location.href="https://github.com/cyclic007";
+                        }
+                        else if (command == "guthib"){
+
+                                window.location.href="https://www.youtube.com/watch?v=dQw4w9WgXcQ";
+                        }
+                        else if (command.substring(0,6) == "signin"){
+                                document.cookie = "username="+command.substring(7,command.length)     
+                                currentText+="</div>"  
+                        }
+                        else if (command.substring(0,7) == "message"){
+        //                         fetch(' {
+        //   method: 'POST',
+        //   headers: {
+        //     'Content-type': 'application/json'
+        //   },
+        //   body:"{\"text:\" \""+command.substring(7,command.length)+"\"}",
+        // });
+                                currentText += "</div><br> message has been sent<br>"
+
+                        }
+                        else {
+                                currentText += "</div>"+"<br> That is an invalid command<br> try again";
+                        }
+                        currentText += "</div>"
+                        render();
+                        window.scrollTo(0,1000000000);
+                        
+                }
+                document.addEventListener("keydown", function(event) {
+                magicFunc(event.keyCode)
+                });
+
+                function magicFunc(keycode){
+                //console.log(keycode);
+                
+                //A-Z  65-90 1234567890  : 48-57  38 UP 40 DOWN 32 SPACE 13 Enter 8 BACKSPACE
+                let magicChar = " "
+                switch(keycode){
+                        case 48 :
+                                magicChar = "0";
+                                break;
+                        case 49 :
+                                magicChar = "1";
+                                break;
+                        case 50 :
+                                magicChar = "2";
+                                break;
+                        case 51 :
+                                magicChar = "3";
+                                break;
+                        case 52 :
+                                magicChar = "4";
+                                break;
+                        case 53 :
+                                magicChar = "5";
+                                break;
+                        case 54 :
+                                magicChar = "6";
+                                break;
+                        case 55 :
+                                magicChar = "7";
+                                break;
+                        case 56 :
+                                magicChar = "8";
+                                break;
+                        case 57 :
+                                magicChar = "9";
+                                break;
+                        case 65 :
+                                magicChar = "a";
+                                break;
+                        case 66 :
+                                magicChar = "b";
+                                break;
+                        case 67 :
+                                magicChar = "c";
+                                break;
+                        case 68 :
+                                magicChar = "d";
+                                break;
+                        case 69 :
+                                magicChar = "e";
+                                break;
+                        case 70 :
+                                magicChar = "f";
+                                break;
+                        case 71 :
+                                magicChar = "g";
+                                break;
+                        case 72 :
+                                magicChar = "h";
+                                break;
+                        case 73 :
+                                magicChar = "i";
+                                break;
+                        case 74 :
+                                magicChar = "j";
+                                break;
+                        case 75 :
+                                magicChar = "k";
+                                break;
+                        case 76 :
+                                magicChar = "l";
+                                break;
+                        case 77 :
+                                magicChar = "m";
+                                break;
+                        case 78 :
+                                magicChar = "n";
+                                break;
+                        case 79 :
+                                magicChar = "o";
+                                break;
+                        case 80 :
+                                magicChar = "p";
+                                break;
+                        case 81 :
+                                magicChar = "q";
+                                break;
+                        case 82 :
+                                magicChar = "r";
+                                break;
+                        case 83 :
+                                magicChar = "s";
+                                break;
+                        case 84 :
+                                magicChar = "t";
+                                break;
+                        case 85 :
+                                magicChar = "u";
+                                break;
+                        case 86 :
+                                magicChar = "v";
+                                break;
+                        case 87 :
+                                magicChar = "w";
+                                break;
+                        case 88 :
+                                magicChar = "x";
+                                break;
+                        case 89 :
+                                magicChar = "y";
+                                break;
+                        case 32 :
+                                magicChar = " ";
+                                break;
+                        case 13 :
+                                excCommand(command.trim());
+                                command = "";
+                                magicChar = "";
+                                
+                                currentText += "<br><div style=\"color: #CA9EE6; display: inline;\">"+getCookie("username")+"</div> @<div style = \"color: #8CAAEE;display: inline;\">"+ip.substring(12,ip.length)+"</div> $ <div class = \"command\">"
+                                break;
+                        case 8 :
+                                
+                                magicChar = "";
+                                
+                                if(command != ""){
+                                currentText = currentText.substring(0,currentText.length-1)
+                                }
+                                command = command.substring(0,command.length-1);
+                                break;
+                }
+                command += magicChar;
+                currentText += magicChar;
+                
+                render();
+                //console.log(command);
+                
+                }
+                
+        </script>
+        </html>
+</div>
 
 
+<div class="mobile">
+        <html>
+                Welcome to cyclic's home where It is all terminals <b>ALL</b> the way down<br>
+        <br><br><img src = "PFP.png"style="width:150px;height:150px; float: left; padding-right: 20px; vertical-align: top;">   <b>username</b>: Cyclic007<br>   <b>Pronouns</b>: He/Him<br><b>personal Channel</b>: #cyclic-hot-mess<br>   <b>Email</b>: cyclicthefox@hackclub.app<br><br>  I use arch BTW<br><br><br><br>
+        visit this website on desktop for the full experence
+<br><br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⡆⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣷⣤⣙⢻⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⢀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⡄⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⡿⠛⠛⠿⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⠏⠀⠀⠀⠀⠙⣿⣿⣿⣿⣿⡄⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⣰⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⢿⣿⣿⣿⣿⠿⣆⠀⠀⠀⠀<br>⠀⠀⠀⣴⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣷⣦⡀⠀⠀⠀<br>⠀⢀⣾⣿⣿⠿⠟⠛⠋⠉⠉⠀⠀⠀⠀⠀⠀⠉⠉⠙⠛⠻⠿⣿⣿⣷⡀⠀<br>⣠⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⠻⣄
+        </html>
+
+
+
+</div>
 
